@@ -21,7 +21,7 @@ pipeline {
 		stage('Build') {
 			steps {
 				script {
-                   System.setProperty("org.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL", "3800");
+                   System.setProperty("org.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL", "86400");
                 }	
 				sh "mvn clean compile"
             }
@@ -29,7 +29,7 @@ pipeline {
 	    stage('TEST') {
 		    steps{
 				script {
-                   System.setProperty("org.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL", "3800");
+                   System.setProperty("org.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL", "86400");
                 }
 				sh "mvn test"
 	        }
@@ -37,7 +37,7 @@ pipeline {
 		stage('QA') {
 		    steps{
 				script {
-                   System.setProperty("org.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL", "3800");
+                   System.setProperty("org.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL", "86400");
                 }
 				sh "mvn failsafe:integration-test failsafe:verify"
 	        }
@@ -45,7 +45,7 @@ pipeline {
 		stage('Package') {
 		    steps{
 				script {
-                   System.setProperty("org.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL", "3800");
+                   System.setProperty("org.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL", "86400");
                 }
 				sh "mvn package -Dskiptests"
 	        }

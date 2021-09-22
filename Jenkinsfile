@@ -42,13 +42,17 @@ pipeline {
 		stage('push docker image')	{
 			steps{
 				script{
-					dockeImage = docker.push()
-					dockeImage = docker.push('latest')
+					docker.withRegistry('','dockerhub') {
+						dockeImage = docker.push()
+					    dockeImage = docker.push('latest')
+					}	
 				}
 			}
 		}
-		script {
-         System.setProperty("org.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL", "3800");
+		 script {
+           System.setProperty("org.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL", "3800");
         }			    	
 	} 
+
+}
 }

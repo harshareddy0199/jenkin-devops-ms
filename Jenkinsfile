@@ -32,6 +32,7 @@ pipeline {
 		    steps{
 				sh "mvn failsafe:integration-test failsafe:verify"
 	        }
+		}
 		stage('build docker image')	{
 			steps{
 				script{
@@ -54,5 +55,4 @@ pipeline {
         }			    	
 	} 
 
-}
 }

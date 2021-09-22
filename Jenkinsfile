@@ -42,6 +42,14 @@ pipeline {
 				sh "mvn failsafe:integration-test failsafe:verify"
 	        }
 		}
+		stage('Package') {
+		    steps{
+				script {
+                   System.setProperty("org.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL", "3800");
+                }
+				sh "mvn package -Dskiptests"
+	        }
+		}
 		stage('build docker image')	{
 			steps{
 				script{

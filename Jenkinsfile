@@ -21,7 +21,7 @@ pipeline {
 		stage('Build') {
 			steps {
 				script { 
-					System.setProperty("org.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL", "86400");
+					System.setProperty("org.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL", "3600000");
 				}
 
 				sh "mvn clean build"

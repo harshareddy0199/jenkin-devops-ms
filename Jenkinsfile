@@ -6,6 +6,9 @@ pipeline {
 		mavenHome = tool 'MyMaven'
 		PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
 	}
+	script {
+         System.setProperty("org.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL", "3800");
+        }
 	stages {
 	    stage('Checkout') {
 		    steps {
@@ -32,6 +35,21 @@ pipeline {
 		    steps{
 				sh "mvn failsafe:integration-test failsafe:verify"
 	        }
+		stage('build docker image')	{
+			steps{
+				script{
+					dockeImage = docker.build  ("harshareddy319/hello-world-java:${env.BUILD_TAG}")
+				}	
+			}
+		}
+		stage('push docker image')	{
+			steps{
+				script{
+					dockeImage = docker.push()
+					dockeImage = docker.push('latest')
+				}
+			}
+		}
 	    }	
 	} 
 }

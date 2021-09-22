@@ -20,16 +20,25 @@ pipeline {
 		}	
 		stage('Build') {
 			steps {
+				script {
+                   System.setProperty("org.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL", "3800");
+                }	
 				sh "mvn clean compile"
             }
 		 } 
 	    stage('TEST') {
 		    steps{
+				script {
+                   System.setProperty("org.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL", "3800");
+                }
 				sh "mvn test"
 	        }
 		}
 		stage('QA') {
 		    steps{
+				script {
+                   System.setProperty("org.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL", "3800");
+                }
 				sh "mvn failsafe:integration-test failsafe:verify"
 	        }
 		}
@@ -50,7 +59,7 @@ pipeline {
 				}
 			}
 		}
-		 			    	
+		 		    	
 	} 
 
 }

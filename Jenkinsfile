@@ -24,7 +24,7 @@ pipeline {
 					System.setProperty("org.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL", "3600000");
 				}
 
-				sh "mvn clean build"
+				sh "mvn clean install"
             }
 		 } 
 	    stage('TEST') {
